@@ -4,33 +4,35 @@
 | NIM | 25410702035 |
 | Nama | Muhammad Latif Sabilis Sudur |
 | Kelas | TI - 2D |
-| Repository | [Link Repository]( https://github.com/muhlatif1809-ui/DPW-MuhammadLatifSabilis-Sudur ) |
+| Repository | [Link Repository]( https://github.com/muhlatif1809-ui/DPW-2026-MuhammadLatifSabilisSudur/tree/main/Jobsheet-08 ) |
 
 ## Struktur File
-``` java
-Jobsheet-05/
+```java
+Jobsheet-08/
 ├── anggota/
-│   ├── list.html
-│   └── tambah.html
+│   ├── list.php
+│   ├── proses_tambah.php
+│   └── tambah.php
 ├── assets/
-│   ├── css/style.css
-│   └── js/app.js
+│   ├── css/
+│   │   └── style.css
+│   └── js/
+│       └── app.js
 ├── buku/
-│   ├── list.html
-│   └── tambah.html
-├── data/
-│   ├── anggota.json
-│   └── buku.json
+│   ├── list.php
+│   ├── proses_tambah.php
+│   └── tambah.php
 ├── docs/
 │   └── wireframe.md
-└── index.html
+├── includes/
+│   ├── footer.php
+│   ├── header.php
+│   └── koneksi.php
+├── sql/
+│   └── 01_buku_anggota.sql
+└── index.php
+└── Report.md
 ```
 
-
 ## Ringkasan
-
-Repository ini merupakan versi terpisah dari project SIMPUS-Mini (Sistem Perpustakaan Mini) yang dibuat khusus untuk keperluan deployment ke Vercel, sehingga tidak tercampur dengan repository utama tugas per-jobsheet. Struktur file yang digunakan tetap sama seperti pada Jobsheet-05, terdiri dari halaman index.html sebagai beranda, folder anggota dan buku yang masing-masing memiliki halaman list.html untuk menampilkan data dan tambah.html untuk menambahkan data baru, folder assets yang menyimpan file styling dan JavaScript, folder data yang berisi file JSON sebagai sumber data buku dan anggota, serta folder docs yang menyimpan dokumen wireframe.
-
-Pada versi ini, data buku dan anggota tidak lagi ditulis langsung di dalam HTML, melainkan diambil secara asinkron dari file anggota.json dan buku.json menggunakan fetch di dalam file anggota.js dan buku.js. Pendekatan ini membuat data lebih mudah dikelola karena cukup mengubah file JSON tanpa perlu menyentuh struktur HTML, sekaligus melatih penerapan konsep asynchronous JavaScript seperti async/await dan penanganan error saat proses pengambilan data gagal.
-
-Repository ini kemudian dihubungkan ke akun GitHub dan di-deploy melalui Vercel agar aplikasi dapat diakses secara online tanpa perlu menjalankan server lokal. Proses ini mencakup pembuatan repository baru di GitHub, push project dari lokal menggunakan Git, hingga proses import dan konfigurasi project di Vercel untuk menghasilkan tautan deployment yang dapat dibagikan.
+Jobsheet 8 melanjutkan SIMPUS-Mini dengan memindahkan penyimpanan data buku dan anggota dari $_SESSION ke database PostgreSQL simpus_mini. File koneksi.php menghubungkan PHP ke database lewat PDO, dan 01_buku_anggota.sql membuat tabel buku dan anggota. Setelah divalidasi di sisi server, data disimpan dengan INSERT memakai prepared statement, lalu ditampilkan dengan SELECT di halaman daftar, sedangkan Beranda menghitung totalnya dengan COUNT(*). Akibatnya, data bersifat permanen dan tidak hilang saat browser ditutup atau server dimatikan. Keterbatasannya, tombol Edit, Detail, dan Hapus belum terhubung ke database.
