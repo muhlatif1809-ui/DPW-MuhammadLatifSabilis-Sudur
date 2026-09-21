@@ -3,26 +3,26 @@ $page_title = "Beranda";
 include __DIR__ . '/includes/header.php';
 require __DIR__ . '/includes/koneksi.php';
 
-$totalBuku = $pdo->query("SELECT COUNT(*) FROM buku")->fetchColumn();
-$totalAnggota = $pdo->query("SELECT COUNT(*) FROM anggota")->fetchColumn();
+$totalKonsol = $pdo->query("SELECT COUNT(*) FROM konsol")->fetchColumn(); // DIGANTI: $totalKendaraan -> $totalKonsol, tabel kendaraan -> konsol
+$totalPenyewa = $pdo->query("SELECT COUNT(*) FROM penyewa")->fetchColumn();
 ?>
         <section>
-            <h2>Selamat Datang di Sistem Perpustakaan Mini</h2>
-            <p>Aplikasi sederhana untuk mengelola data buku dan anggota perpustakaan.</p>
+            <h2>Selamat Datang di Rental PS</h2> <?php /* DIGANTI: sebelumnya "Selamat Datang di Rental" */ ?>
+            <p>Aplikasi sederhana untuk mengelola data konsol PlayStation dan penyewa.</p> <?php /* DIGANTI: sebelumnya "data kendaraan dan penyewa" */ ?>
         </section>
 
         <section>
             <h2>Ringkasan</h2>
             <article>
-                <h3>Total Buku</h3>
-                <p><?php echo $totalBuku; ?></p>
+                <h3>Total Konsol</h3> <?php /* DIGANTI: sebelumnya "Total Kendaraan" */ ?>
+                <p><?php echo (int) $totalKonsol; ?></p> <?php /* DIGANTI: sebelumnya $totalKendaraan */ ?>
             </article>
             <article>
-                <h3>Total Anggota</h3>
-                <p><?php echo $totalAnggota; ?></p>
+                <h3>Total Penyewa</h3>
+                <p><?php echo (int) $totalPenyewa; ?></p>
             </article>
             <article>
-                <h3>Sedang Dipinjam</h3>
+                <h3>Sedang Disewa</h3>
                 <p>0</p>
             </article>
         </section>

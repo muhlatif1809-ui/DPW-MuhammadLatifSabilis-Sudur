@@ -1,9 +1,9 @@
 <?php
 $host = "localhost";
 $port = "5432";
-$db   = "simpus_mini";
+$db   = "rental_ps"; // DIGANTI: sebelumnya "rental"
 $user = "postgres";
-$pass = "180906";
+$pass = "postgres"; // ganti dengan password PostgreSQL kamu
 
 try {
     $pdo = new PDO("pgsql:host=$host;port=$port;dbname=$db", $user, $pass);

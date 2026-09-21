@@ -1,4 +1,6 @@
-// ===== Hamburger menu (JS-driven, menggantikan checkbox hack) =====
+// TETAP: seluruh file ini sama dengan proyek Rental, tidak ada yang diganti.
+
+// ===== Hamburger menu =====
 function initNavToggle() {
     const toggleBtn = document.getElementById("nav-toggle-btn");
     const nav = document.querySelector("header nav");
@@ -9,19 +11,34 @@ function initNavToggle() {
     });
 }
 
-// ===== Konfirmasi hapus (front-end only, belum ke server) =====
-// Memakai event delegation di document karena baris tabel sekarang
-// dirender dinamis via fetch (lihat buku.js/anggota.js) sehingga
-// tombol .btn-hapus belum tentu ada saat DOMContentLoaded.
+// ===== Konfirmasi hapus =====
+// Memakai event delegation di document. Tombol .btn-hapus mengirim
+// permintaan hapus ke server (POST) lewat data-id dan data-action,
+// sehingga data di database ikut terhapus.
 function initHapusConfirm() {
     document.addEventListener("click", function (e) {
         const btn = e.target.closest(".btn-hapus");
         if (!btn) return;
 
         const row = btn.closest("tr");
-        const nama = row ? row.querySelector("td")?.textContent : "data ini";
+        const nama = btn.dataset.nama || (row ? row.querySelector("td")?.textContent : "data ini");
         const yakin = confirm("Yakin ingin menghapus \"" + nama + "\"?");
-        if (yakin && row) {
+        if (!yakin) return;
+
+        if (btn.dataset.id && btn.dataset.action) {
+            const form = document.createElement("form");
+            form.method = "post";
+            form.action = btn.dataset.action;
+
+            const input = document.createElement("input");
+            input.type = "hidden";
+            input.name = "id";
+            input.value = btn.dataset.id;
+
+            form.appendChild(input);
+            document.body.appendChild(form);
+            form.submit();
+        } else if (row) {
             row.remove();
         }
     });
@@ -59,6 +76,8 @@ function hapusError(input) {
     }
 }
 
+// Semua input ber-atribut "required" wajib diisi. Input angka juga
+// dicek terhadap atribut min dan max miliknya.
 function initValidasiForm() {
     const form = document.getElementById("form-tambah");
     if (!form) return;
@@ -66,43 +85,32 @@ function initValidasiForm() {
     form.addEventListener("submit", function (e) {
         let valid = true;
 
-        const judul = form.querySelector("[name='judul'], [name='nama']");
-        if (judul && judul.value.trim() === "") {
-            tampilkanError(judul, "Field ini wajib diisi.");
-            valid = false;
-        } else if (judul) {
-            hapusError(judul);
-        }
+        form.querySelectorAll("input[required]").forEach(function (input) {
+            hapusError(input);
 
-        const pengarang = form.querySelector("[name='pengarang']");
-        if (pengarang && pengarang.value.trim() === "") {
-            tampilkanError(pengarang, "Pengarang wajib diisi.");
-            valid = false;
-        } else if (pengarang) {
-            hapusError(pengarang);
-        }
-
-        const tahun = form.querySelector("[name='tahun']");
-        if (tahun) {
-            const nilai = parseInt(tahun.value, 10);
-            if (isNaN(nilai) || nilai < 1900 || nilai > 2026) {
-                tampilkanError(tahun, "Tahun harus di antara 1900-2026.");
+            if (input.value.trim() === "") {
+                tampilkanError(input, "Field ini wajib diisi.");
                 valid = false;
-            } else {
-                hapusError(tahun);
+                return;
             }
-        }
 
-        const stok = form.querySelector("[name='stok']");
-        if (stok) {
-            const nilai = parseInt(stok.value, 10);
-            if (isNaN(nilai) || nilai < 0) {
-                tampilkanError(stok, "Stok tidak boleh negatif.");
-                valid = false;
-            } else {
-                hapusError(stok);
+            if (input.type === "number") {
+                const nilai = parseInt(input.value, 10);
+                const min = input.min !== "" ? parseInt(input.min, 10) : null;
+                const max = input.max !== "" ? parseInt(input.max, 10) : null;
+
+                if (isNaN(nilai)) {
+                    tampilkanError(input, "Isi dengan angka.");
+                    valid = false;
+                } else if (min !== null && max !== null && (nilai < min || nilai > max)) {
+                    tampilkanError(input, "Nilai harus di antara " + min + " dan " + max + ".");
+                    valid = false;
+                } else if (min !== null && nilai < min) {
+                    tampilkanError(input, "Nilai minimal " + min + ".");
+                    valid = false;
+                }
             }
-        }
+        });
 
         if (!valid) {
             e.preventDefault();
