@@ -1,6 +1,6 @@
 <?php
 session_start();
-require __DIR__ . '/../../includes/koneksi.php';
+require __DIR__ . '/../includes/koneksi.php';
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     header('Location: tambah.php');

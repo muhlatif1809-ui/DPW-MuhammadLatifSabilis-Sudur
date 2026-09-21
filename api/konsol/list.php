@@ -1,7 +1,7 @@
 <?php
 $page_title = "Daftar Konsol"; // DIGANTI: sebelumnya "Daftar Kendaraan"
-include __DIR__ . '/../../includes/header.php';
-require __DIR__ . '/../../includes/koneksi.php';
+include __DIR__ . '/../includes/header.php';
+require __DIR__ . '/../includes/koneksi.php';
 
 $flash = $_SESSION['flash'] ?? null;
 unset($_SESSION['flash']);
@@ -57,4 +57,4 @@ $daftarKonsol = $pdo->query("SELECT * FROM konsol ORDER BY id DESC")->fetchAll(P
             </table>
             </div>
         </section>
-<?php include __DIR__ . '/../../includes/footer.php'; ?>
+<?php include __DIR__ . '/../includes/footer.php'; ?>

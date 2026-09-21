@@ -58,4 +58,4 @@ $daftarPenyewa = $pdo->query("SELECT * FROM penyewa ORDER BY id DESC")->fetchAll
             </table>
             </div>
         </section>
-<?php include __DIR__ . '/../../includes/footer.php'; ?>
+<?php include __DIR__ . '/../includes/footer.php'; ?>

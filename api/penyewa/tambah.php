@@ -1,7 +1,7 @@
 <?php
 // TETAP: seluruh file ini sama dengan proyek Rental, tidak ada yang diganti.
 $page_title = "Tambah Penyewa";
-include __DIR__ . '/../../includes/header.php';
+include __DIR__ . '/../includes/header.php';
 
 $flash = $_SESSION['flash'] ?? null;
 unset($_SESSION['flash']);
@@ -35,4 +35,4 @@ unset($_SESSION['flash']);
                 </p>
             </form>
         </section>
-<?php include __DIR__ . '/../../includes/footer.php'; ?>
+<?php include __DIR__ . '/../includes/footer.php'; ?>
