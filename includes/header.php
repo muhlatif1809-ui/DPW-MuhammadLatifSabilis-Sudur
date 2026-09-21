@@ -20,7 +20,7 @@ $base = $__rel === '' ? '' : str_repeat('../', substr_count($__rel, '/') + 1);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Rental PS<?php echo isset($page_title) ? ' | ' . e($page_title) : ''; ?></title> <?php /* DIGANTI: sebelumnya "Rental" */ ?>
-    <link rel="stylesheet" href="<?php echo $base; ?>assets/css/style.css">
+    <link rel="stylesheet" href="/assets/css/style.css">
 </head>
 <body>
     <header>
