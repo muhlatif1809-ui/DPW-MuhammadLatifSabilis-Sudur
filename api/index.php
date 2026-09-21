@@ -1,7 +1,7 @@
 <?php
 $page_title = "Beranda";
-include __DIR__ . '/../includes/header.php';
 require __DIR__ . '/../includes/koneksi.php';
+include __DIR__ . '/../includes/header.php';
 
 $totalKonsol = $pdo->query("SELECT COUNT(*) FROM konsol")->fetchColumn(); // DIGANTI: $totalKendaraan -> $totalKonsol, tabel kendaraan -> konsol
 $totalPenyewa = $pdo->query("SELECT COUNT(*) FROM penyewa")->fetchColumn();
