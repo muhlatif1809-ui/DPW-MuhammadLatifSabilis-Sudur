@@ -7,6 +7,13 @@ function e($teks)
     return htmlspecialchars((string) $teks, ENT_QUOTES, 'UTF-8');
 }
 
+// BARU: penanda halaman aktif untuk menu. Membaca $page_title yang diisi tiap halaman.
+function kelasAktif($judul)
+{
+    global $page_title;                           // BARU: judul halaman yang sedang dibuka
+    return (isset($page_title) && $page_title === $judul) ? ' class="aktif" aria-current="page"' : ''; // BARU
+}
+
 // Prefix relatif ke root proyek ini (bukan root domain) — supaya
 // /assets, /index.php, dst tetap benar walau proyek diakses lewat subfolder.
 $__projectRoot = dirname(__DIR__);
@@ -28,12 +35,16 @@ $base = $__rel === '' ? '' : str_repeat('../', substr_count($__rel, '/') + 1);
         <button type="button" id="nav-toggle-btn" class="nav-toggle-label" aria-label="Menu">&#9776;</button>
         <nav>
             <ul>
-                <li><a href="<?php echo $base; ?>index.php">Beranda</a></li>
-                <li><a href="<?php echo $base; ?>konsol/list.php">Daftar Konsol</a></li> <?php /* DIUBAH: urutan pindah ke atas (tautan biasa dikelompokkan dulu) */ ?>
-                <li><a href="<?php echo $base; ?>penyewa/list.php">Daftar Penyewa</a></li> <?php /* DIUBAH: urutan pindah ke atas */ ?>
-                <li class="nav-sep" aria-hidden="true"></li> <?php /* BARU: garis pemisah antara tautan dan tombol */ ?>
-                <li><a class="nav-btn" href="<?php echo $base; ?>konsol/tambah.php">+ Konsol</a></li> <?php /* DIGANTI: sebelumnya tautan "Tambah Konsol", kini tombol "+ Konsol" (class nav-btn) */ ?>
-                <li><a class="nav-btn" href="<?php echo $base; ?>penyewa/tambah.php">+ Penyewa</a></li> <?php /* DIGANTI: sebelumnya tautan "Tambah Penyewa", kini tombol "+ Penyewa" (class nav-btn) */ ?>
+                <li class="nav-seg"> <?php /* BARU: wadah segmented untuk tiga tautan */ ?>
+                    <ul> <?php /* BARU: daftar tiga tautan di dalam wadah */ ?>
+                        <li><a<?php echo kelasAktif('Beranda'); ?> href="<?php echo $base; ?>index.php">Beranda</a></li> <?php /* DIUBAH: ditambah penanda halaman aktif */ ?>
+                        <li><a<?php echo kelasAktif('Daftar Konsol'); ?> href="<?php echo $base; ?>konsol/list.php">Daftar Konsol</a></li> <?php /* DIUBAH: ditambah penanda halaman aktif */ ?>
+                        <li><a<?php echo kelasAktif('Daftar Penyewa'); ?> href="<?php echo $base; ?>penyewa/list.php">Daftar Penyewa</a></li> <?php /* DIUBAH: ditambah penanda halaman aktif */ ?>
+                    </ul>
+                </li>
+                <li class="nav-sep" aria-hidden="true"></li> <?php /* TETAP: garis pemisah antara tautan dan tombol */ ?>
+                <li><a class="nav-btn" href="<?php echo $base; ?>konsol/tambah.php">+ Konsol</a></li> <?php /* TETAP: tombol + Konsol */ ?>
+                <li><a class="nav-btn" href="<?php echo $base; ?>penyewa/tambah.php">+ Penyewa</a></li> <?php /* TETAP: tombol + Penyewa */ ?>
             </ul>
         </nav>
     </header>

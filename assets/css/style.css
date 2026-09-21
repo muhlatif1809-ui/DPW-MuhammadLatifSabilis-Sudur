@@ -1,4 +1,4 @@
-/* DIUBAH: bagian "Ringkasan" (papan skor), menu navigasi bertombol, dan aturan responsifnya.
+/* DIUBAH: bagian "Ringkasan" (papan skor), menu navigasi (segmented + tombol), dan aturan responsifnya.
    Bagian lain sama dengan proyek Rental. */
 
 /* ===== Reset & Base ===== */
@@ -53,6 +53,31 @@ header nav a {
 /* BARU: menu bertombol. Menu "Tambah" tampil sebagai tombol putih, sisanya tautan biasa. */
 header nav ul {
     align-items: center;                          /* BARU: tautan dan tombol sejajar di tengah */
+}
+
+/* BARU: menu segmented. Tiga tautan dikelompokkan dalam satu wadah, halaman aktif berlatar putih. */
+.nav-seg ul {
+    gap: 2px;                                     /* BARU: jarak antar segmen (sebelumnya 1.25rem) */
+    padding: 3px;                                 /* BARU: ruang di dalam wadah */
+    background-color: rgba(0, 0, 0, 0.2);         /* BARU: wadah gelap transparan */
+    border-radius: 8px;                           /* BARU: sudut wadah membulat */
+}
+
+.nav-seg a {
+    display: block;                               /* BARU: seluruh area segmen bisa diklik */
+    padding: 0.3rem 0.8rem;                       /* BARU: ruang di dalam segmen */
+    border-radius: 6px;                           /* BARU: sudut segmen membulat */
+    font-size: 0.9rem;                            /* BARU: ukuran teks segmen */
+}
+
+.nav-seg a:hover {
+    background-color: rgba(255, 255, 255, 0.15);  /* BARU: warna segmen saat di-hover */
+    text-decoration: none;                        /* BARU: tanpa garis bawah saat di-hover */
+}
+
+.nav-seg a.aktif {
+    background-color: #fff;                       /* BARU: segmen halaman aktif berlatar putih */
+    color: #007e7e;                               /* BARU: teks segmen aktif toska */
 }
 
 .nav-sep {
@@ -313,6 +338,10 @@ footer {
 
     .nav-sep {
         display: none;                            /* BARU: garis pemisah disembunyikan di layar kecil */
+    }
+
+    .nav-seg ul {
+        align-items: stretch;                     /* BARU: segmen memenuhi lebar wadah di menu hamburger */
     }
 
     /* BARU: di layar kecil papan skor menjadi satu kolom */
