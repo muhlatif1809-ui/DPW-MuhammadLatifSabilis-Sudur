@@ -1,6 +1,6 @@
 <?php
 $page_title = "Tambah Konsol"; // DIGANTI: sebelumnya "Tambah Kendaraan"
-include __DIR__ . '/../includes/header.php';
+include __DIR__ . '/../../includes/header.php';
 
 $flash = $_SESSION['flash'] ?? null;
 unset($_SESSION['flash']);
@@ -38,4 +38,4 @@ unset($_SESSION['flash']);
                 </p>
             </form>
         </section>
-<?php include __DIR__ . '/../includes/footer.php'; ?>
+<?php include __DIR__ . '/../../includes/footer.php'; ?>

@@ -1,8 +1,8 @@
 <?php
 // TETAP: seluruh file ini sama dengan proyek Rental, tidak ada yang diganti.
 $page_title = "Daftar Penyewa";
-include __DIR__ . '/../includes/header.php';
-require __DIR__ . '/../includes/koneksi.php';
+include __DIR__ . '/../../includes/header.php';
+require __DIR__ . '/../../includes/koneksi.php';
 
 $flash = $_SESSION['flash'] ?? null;
 unset($_SESSION['flash']);
@@ -58,4 +58,4 @@ $daftarPenyewa = $pdo->query("SELECT * FROM penyewa ORDER BY id DESC")->fetchAll
             </table>
             </div>
         </section>
-<?php include __DIR__ . '/../includes/footer.php'; ?>
+<?php include __DIR__ . '/../../includes/footer.php'; ?>
