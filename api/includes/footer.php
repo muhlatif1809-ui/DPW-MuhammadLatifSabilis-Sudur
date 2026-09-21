@@ -1,7 +1,7 @@
     </main>
 
     <footer>
-        <p>&copy; Muhammad Latif Sasbilis Sudur - 2026 Rental PS</p> <?php /* DIGANTI: sebelumnya "Rental" */ ?>
+        <p>&copy; Muhammad Latif Sabilis Sudur - 2026 Rental PS</p> <?php /* DIGANTI: sebelumnya "Rental" */ ?>
     </footer>
     <script src="<?php echo $base; ?>assets/js/app.js"></script>
     <?php if (!empty($extra_scripts)): foreach ($extra_scripts as $src): ?>
