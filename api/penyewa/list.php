@@ -1,8 +1,8 @@
 <?php
 // TETAP: seluruh file ini sama dengan proyek Rental, tidak ada yang diganti.
 $page_title = "Daftar Penyewa";
-include __DIR__ . '/../../includes/header.php';
-require __DIR__ . '/../../includes/koneksi.php';
+include __DIR__ . '/../includes/header.php';
+require __DIR__ . '/../includes/koneksi.php';
 
 $flash = $_SESSION['flash'] ?? null;
 unset($_SESSION['flash']);
