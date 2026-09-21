@@ -1,4 +1,5 @@
-/* DIUBAH: bagian "Ringkasan" (papan skor), menu navigasi (segmented + tombol), dan aturan responsifnya.
+/* DIUBAH: bagian "Ringkasan" (papan skor), menu navigasi (segmented + tombol),
+   tabel minimalis, form dua kolom, dan aturan responsifnya.
    Bagian lain sama dengan proyek Rental. */
 
 /* ===== Reset & Base ===== */
@@ -170,14 +171,19 @@ th, td {
     border-bottom: 1px solid #e2e6ea;
 }
 
+/* DIGANTI: tabel minimalis. Sebelumnya header tabel berlatar toska, baris berselang-seling, tombol berwarna penuh. */
 thead {
-    background-color: #007e7e;
-    color: #fff;
+    background-color: transparent;                /* DIGANTI: sebelumnya #007e7e (latar toska) */
+    color: #007e7e;                               /* DIGANTI: sebelumnya #fff. Kini teks judul kolom yang toska */
 }
 
-tbody tr:nth-child(even) {
-    background-color: #f7f9fb;
+th {
+    font-size: 0.85rem;                           /* BARU: judul kolom sedikit lebih kecil */
+    font-weight: 600;                             /* BARU */
+    border-bottom: 2px solid #007e7e;             /* BARU: garis toska di bawah judul kolom */
 }
+
+/* DIHAPUS: aturan tbody tr:nth-child(even), yaitu warna baris selang-seling #f7f9fb */
 
 tbody tr:hover {
     background-color: #f1ecfb;
@@ -186,21 +192,28 @@ tbody tr:hover {
 td button {
     padding: 0.35rem 0.7rem;
     margin-right: 0.35rem;
-    border: none;
+    border: 1px solid #cdd4da;                    /* DIGANTI: sebelumnya "none". Tombol kini berbingkai */
     border-radius: 4px;
+    background-color: #fff;                       /* BARU: latar tombol putih */
+    color: #2b2b2b;                               /* BARU: teks tombol gelap */
     cursor: pointer;
     font-size: 0.85rem;
 }
 
-td button:first-of-type {
-    background-color: #3820be;
-    color: #fff;
+td button:hover {
+    background-color: #f3f4f6;                    /* BARU: warna tombol saat di-hover */
 }
 
-td button:last-of-type {
-    background-color: #000000;
-    color: #fff;
+td button.btn-hapus {
+    color: #b91c1c;                               /* DIGANTI: sebelumnya tombol hitam berteks putih. Kini teks merah */
+    border-color: #f0b4b4;                        /* BARU: bingkai merah muda */
 }
+
+td button.btn-hapus:hover {
+    background-color: #fdecec;                    /* BARU: latar merah muda saat di-hover */
+}
+
+/* DIHAPUS: aturan td button:first-of-type (Edit biru #3820be) dan td button:last-of-type (Hapus hitam) */
 
 /* ===== Form ===== */
 form p {
@@ -212,6 +225,26 @@ form label {
     margin-bottom: 0.35rem;
     font-weight: 600;
     color: #444;
+}
+
+/* BARU: form dua kolom. Empat isian berdampingan, tombol Simpan selebar baris. */
+form#form-tambah {
+    display: grid;                                /* BARU */
+    grid-template-columns: 1fr 1fr;               /* BARU: dua kolom */
+    column-gap: 1.5rem;                           /* BARU: jarak antar kolom */
+}
+
+form#form-tambah p:last-of-type {
+    grid-column: 1 / -1;                          /* BARU: baris tombol Simpan melebar ke dua kolom */
+}
+
+form#form-tambah input,
+form#form-tambah select {
+    max-width: 100%;                              /* BARU: isian memenuhi lebar kolom (sebelumnya maksimal 400px) */
+}
+
+form#form-tambah label + br {
+    display: none;                                /* BARU: hilangkan jarak ekstra antara label dan isian */
 }
 
 form input,
@@ -347,6 +380,10 @@ footer {
     /* BARU: di layar kecil papan skor menjadi satu kolom */
     main section:nth-of-type(2) {                 /* BARU: blok Ringkasan */
         grid-template-columns: 1fr;               /* BARU: satu kolom (sebelumnya dua) */
+    }
+
+    form#form-tambah {
+        grid-template-columns: 1fr;               /* BARU: di layar kecil form kembali satu kolom */
     }
 
     form input,
