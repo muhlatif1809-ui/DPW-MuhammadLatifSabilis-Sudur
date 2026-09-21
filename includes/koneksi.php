@@ -1,9 +1,9 @@
 <?php
-$host = getenv('DB_HOST');
-$port = getenv('DB_PORT');
-$dbname = getenv('DB_NAME');
-$user = getenv('DB_USER');
-$password = getenv('DB_PASSWORD');
+$host = getenv('host');
+$port = getenv('port');
+$dbname = getenv('database');
+$user = getenv('user');
+$password = getenv('password'); // perlu ditambahkan dulu di Vercel
 
 try {
     $pdo = new PDO("pgsql:host=$host;port=$port;dbname=$dbname", $user, $password);
