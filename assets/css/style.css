@@ -1,4 +1,5 @@
-/* TETAP: seluruh file ini sama dengan proyek Rental, tidak ada yang diganti. */
+/* DIUBAH: bagian "Ringkasan" (papan skor), menu navigasi bertombol, dan aturan responsifnya.
+   Bagian lain sama dengan proyek Rental. */
 
 /* ===== Reset & Base ===== */
 * {
@@ -49,6 +50,31 @@ header nav a {
     font-weight: 500;
 }
 
+/* BARU: menu bertombol. Menu "Tambah" tampil sebagai tombol putih, sisanya tautan biasa. */
+header nav ul {
+    align-items: center;                          /* BARU: tautan dan tombol sejajar di tengah */
+}
+
+.nav-sep {
+    width: 1px;                                   /* BARU: garis pemisah tipis */
+    height: 1.25rem;                              /* BARU: tinggi garis pemisah */
+    background-color: rgba(255, 255, 255, 0.35);  /* BARU: putih transparan */
+}
+
+header nav a.nav-btn {
+    background-color: #fff;                       /* BARU: latar tombol putih */
+    color: #007e7e;                               /* BARU: teks tombol toska */
+    padding: 0.35rem 0.85rem;                     /* BARU: ruang di dalam tombol */
+    border-radius: 6px;                           /* BARU: sudut membulat */
+    font-size: 0.85rem;                           /* BARU: ukuran teks tombol */
+    font-weight: 600;                             /* BARU: teks tombol lebih tebal dari tautan */
+}
+
+header nav a.nav-btn:hover {
+    background-color: #f1ecfb;                    /* BARU: warna saat di-hover */
+    text-decoration: none;                        /* BARU: tanpa garis bawah saat di-hover */
+}
+
 /* ===== Main Layout ===== */
 main {
     max-width: 1000px;
@@ -69,30 +95,43 @@ section h2 {
     color: #007e7e;
 }
 
-/* ===== Ringkasan (daftar tersusun ke bawah) ===== */
-main section:nth-of-type(2) article {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0.75rem 0.25rem;
-    border-bottom: 1px solid #e2e6ea;
+/* ===== Ringkasan (papan skor) ===== */
+/* DIGANTI: sebelumnya daftar tersusun ke bawah (label kiri, angka kanan, garis pemisah). */
+main section:nth-of-type(2) {
+    display: grid;                                /* BARU: tiga kotak berjajar */
+    grid-template-columns: repeat(3, 1fr);        /* BARU */
+    gap: 1rem;                                    /* BARU */
 }
 
-main section:nth-of-type(2) article:last-of-type {
-    border-bottom: none;
+main section:nth-of-type(2) h2 {
+    grid-column: 1 / -1;                          /* BARU: judul "Ringkasan" selebar satu baris */
+}
+
+main section:nth-of-type(2) article {
+    background-color: #1f2937;                    /* DIGANTI: sebelumnya tanpa latar */
+    border-radius: 8px;                           /* BARU */
+    padding: 1rem 0.75rem;                        /* DIGANTI: sebelumnya 0.75rem 0.25rem */
+    text-align: center;                           /* BARU */
+    display: flex;                                /* TETAP: sama seperti versi daftar sebelumnya */
+    flex-direction: column-reverse;               /* DIGANTI: angka di atas, label di bawah (sebelumnya sejajar kiri-kanan) */
+    /* DIHAPUS: align-items, justify-content, dan border-bottom (garis pemisah) */
 }
 
 main section:nth-of-type(2) article h3 {
-    font-size: 0.95rem;
+    font-size: 0.8rem;                            /* DIGANTI: sebelumnya 0.95rem */
     font-weight: 400;
-    color: #55677a;
+    color: #9ca3af;                               /* DIGANTI: sebelumnya #55677a */
+    margin-top: 0.4rem;                           /* BARU */
 }
 
 main section:nth-of-type(2) article p {
-    font-size: 1.6rem;
+    font-size: 2.25rem;                           /* DIGANTI: sebelumnya 1.6rem */
     font-weight: 700;
-    color: #007e7e;
+    color: #2dd4bf;                               /* DIGANTI: sebelumnya #007e7e */
+    line-height: 1.1;                             /* BARU */
 }
+
+/* DIHAPUS: aturan article:last-of-type (garis pemisah baris terakhir) */
 
 /* ===== Tabel ===== */
 table {
@@ -238,6 +277,13 @@ footer {
 
 /* ===== Responsive Breakpoints ===== */
 
+/* BARU: Tablet ke bawah, papan skor menjadi dua kolom */
+@media (max-width: 768px) {                       /* BARU: aturan untuk layar 768px ke bawah */
+    main section:nth-of-type(2) {                 /* BARU: blok Ringkasan */
+        grid-template-columns: repeat(2, 1fr);    /* BARU: dua kolom (sebelumnya tiga) */
+    }
+}
+
 /* Mobile */
 @media (max-width: 480px) {
     header {
@@ -262,6 +308,16 @@ footer {
     header nav ul {
         flex-direction: column;
         gap: 0.75rem;
+        align-items: flex-start;                  /* BARU: tombol tidak melebar di menu hamburger */
+    }
+
+    .nav-sep {
+        display: none;                            /* BARU: garis pemisah disembunyikan di layar kecil */
+    }
+
+    /* BARU: di layar kecil papan skor menjadi satu kolom */
+    main section:nth-of-type(2) {                 /* BARU: blok Ringkasan */
+        grid-template-columns: 1fr;               /* BARU: satu kolom (sebelumnya dua) */
     }
 
     form input,

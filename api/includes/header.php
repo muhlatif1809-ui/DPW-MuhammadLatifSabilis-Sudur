@@ -20,7 +20,7 @@ $base = $__rel === '' ? '' : str_repeat('../', substr_count($__rel, '/') + 1);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Rental PS<?php echo isset($page_title) ? ' | ' . e($page_title) : ''; ?></title> <?php /* DIGANTI: sebelumnya "Rental" */ ?>
-    <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="stylesheet" href="<?php echo $base; ?>assets/css/style.css">
 </head>
 <body>
     <header>
@@ -29,10 +29,11 @@ $base = $__rel === '' ? '' : str_repeat('../', substr_count($__rel, '/') + 1);
         <nav>
             <ul>
                 <li><a href="<?php echo $base; ?>index.php">Beranda</a></li>
-                <li><a href="<?php echo $base; ?>konsol/list.php">Daftar Konsol</a></li> <?php /* DIGANTI: sebelumnya kendaraan/list.php "Daftar Kendaraan" */ ?>
-                <li><a href="<?php echo $base; ?>konsol/tambah.php">Tambah Konsol</a></li> <?php /* DIGANTI: sebelumnya kendaraan/tambah.php "Tambah Kendaraan" */ ?>
-                <li><a href="<?php echo $base; ?>penyewa/list.php">Daftar Penyewa</a></li>
-                <li><a href="<?php echo $base; ?>penyewa/tambah.php">Tambah Penyewa</a></li>
+                <li><a href="<?php echo $base; ?>konsol/list.php">Daftar Konsol</a></li> <?php /* DIUBAH: urutan pindah ke atas (tautan biasa dikelompokkan dulu) */ ?>
+                <li><a href="<?php echo $base; ?>penyewa/list.php">Daftar Penyewa</a></li> <?php /* DIUBAH: urutan pindah ke atas */ ?>
+                <li class="nav-sep" aria-hidden="true"></li> <?php /* BARU: garis pemisah antara tautan dan tombol */ ?>
+                <li><a class="nav-btn" href="<?php echo $base; ?>konsol/tambah.php">+ Konsol</a></li> <?php /* DIGANTI: sebelumnya tautan "Tambah Konsol", kini tombol "+ Konsol" (class nav-btn) */ ?>
+                <li><a class="nav-btn" href="<?php echo $base; ?>penyewa/tambah.php">+ Penyewa</a></li> <?php /* DIGANTI: sebelumnya tautan "Tambah Penyewa", kini tombol "+ Penyewa" (class nav-btn) */ ?>
             </ul>
         </nav>
     </header>
