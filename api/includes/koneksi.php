@@ -4,7 +4,7 @@ $host     = getenv('DB_HOST') ?: 'aws-0-ap-south-1.pooler.supabase.com'; // Gant
 $port     = getenv('DB_PORT') ?: '6543';
 $dbname   = getenv('DB_NAME') ?: 'postgres';
 $user     = getenv('DB_USER') ?: 'postgres.skrfnclqkknzplzjivql';
-$password = getenv('DB_PASS') ?: 'Muhlatif180906';
+$password = getenv('DB_PASS') ?: 'MuhLatif180906';
 
 try {
     // PASTI KAN FORMAT DSN: pgsql:host=...;port=...;dbname=...
