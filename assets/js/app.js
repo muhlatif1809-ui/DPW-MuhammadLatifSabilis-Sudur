@@ -1,4 +1,4 @@
-// TETAP: seluruh file ini sama dengan proyek Rental, tidak ada yang diganti.
+// DIUBAH: hanya fungsi initTableFilter() yang diganti (mendukung daftar berbaris). Bagian lain sama dengan proyek Rental.
 
 // ===== Hamburger menu =====
 function initNavToggle() {
@@ -47,12 +47,19 @@ function initHapusConfirm() {
 // ===== Filter/pencarian tabel real-time =====
 function initTableFilter() {
     const input = document.getElementById("search-input");
+    if (!input) return;
+
+    // DIGANTI: sebelumnya hanya mencari baris tabel (.table-responsive table tbody tr).
+    // Kini mencari baris ".baris" pada daftar berbaris, dan tetap mendukung tabel.
+    const daftar = document.querySelector(".daftar-menu");
     const table = document.querySelector(".table-responsive table");
-    if (!input || !table) return;
+    if (!daftar && !table) return;
 
     input.addEventListener("keyup", function () {
         const keyword = input.value.toLowerCase();
-        const rows = table.querySelectorAll("tbody tr");
+        const rows = daftar
+            ? daftar.querySelectorAll(".baris")                 // BARU: baris pada daftar berbaris
+            : table.querySelectorAll("tbody tr");
         rows.forEach(function (row) {
             const teks = row.textContent.toLowerCase();
             row.style.display = teks.includes(keyword) ? "" : "none";

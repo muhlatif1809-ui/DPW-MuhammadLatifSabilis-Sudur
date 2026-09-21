@@ -1,6 +1,7 @@
-/* DIUBAH: bagian "Ringkasan" dibuat vertikal,
-   menu navigasi, tabel minimalis, form dua kolom,
-   dan aturan responsifnya. */
+/* DIUBAH: tema gelap bergaya game di semua halaman.
+   Beranda bergaya menu utama (G5). Halaman Daftar dan Tambah bergaya H1:
+   daftar berbaris seperti menu, form berbaris dengan label di kiri dan isian di kanan.
+   Bagian lain sama dengan proyek Rental. */
 
 /* ===== Reset & Base ===== */
 * {
@@ -11,13 +12,13 @@
 
 body {
     font-family: "Segoe UI", Arial, sans-serif;
-    color: #2b2b2b;
-    background-color: #374151;
+    color: #e5e7eb;                               /* DIGANTI: sebelumnya #2b2b2b (teks gelap). Kini teks terang */
+    background-color: #0e0e16;                    /* DIGANTI: sebelumnya #f3f4f6 (abu-abu terang). Kini hampir hitam */
     line-height: 1.5;
 }
 
 a {
-    color: #0000ee;
+    color: #00e5c7;                               /* DIGANTI: sebelumnya #0000ee (biru tautan). Kini toska terang */
     text-decoration: none;
 }
 
@@ -25,77 +26,45 @@ a:hover {
     text-decoration: underline;
 }
 
-/* ===== Header & Navbar ===== */
-header {
-    background-color: #007e7e;
-    color: #fff;
-    padding: 1rem 1.5rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
+/* ===== Bar Atas Bergaya Game ===== */
+/* DIGANTI: sebelumnya header toska berisi nama aplikasi, menu navigasi, dan tombol hamburger. */
+.gbar {
+    display: flex;                                /* BARU: tautan kembali di kiri, tombol aksi di kanan */
+    justify-content: space-between;               /* BARU */
+    align-items: center;                          /* BARU */
+    max-width: 1000px;                            /* BARU: sejajar dengan isi halaman */
+    margin: 0 auto;                               /* BARU */
+    padding: 1rem 1.5rem;                         /* BARU */
 }
 
-header h1 {
-    font-size: 1.4rem;
+.gbar-kembali {
+    color: #8b93a7;                               /* BARU: tautan "Menu Utama" berwarna abu */
+    font-size: 0.8rem;                            /* BARU */
+    letter-spacing: 0.08em;                       /* BARU */
+    text-transform: uppercase;                    /* BARU */
 }
 
-header nav ul {
-    list-style: none;
-    display: flex;
-    gap: 1.25rem;
-    align-items: center;
+.gbar-kembali:hover {
+    color: #fff;                                  /* BARU: putih saat di-hover */
+    text-decoration: none;                        /* BARU */
 }
 
-header nav a {
-    color: #fff;
-    font-weight: 500;
+.gbar-aksi {
+    background-color: #00e5c7;                    /* BARU: tombol aksi toska terang */
+    color: #0e0e16;                               /* BARU */
+    font-size: 0.8rem;                            /* BARU */
+    font-weight: 700;                             /* BARU */
+    padding: 0.3rem 0.8rem;                       /* BARU */
+    border-radius: 4px;                           /* BARU */
 }
 
-/* ===== Menu Segmented ===== */
-.nav-seg ul {
-    gap: 2px;
-    padding: 3px;
-    background-color: rgba(0, 0, 0, 0.2);
-    border-radius: 8px;
+.gbar-aksi:hover {
+    background-color: #5ff5df;                    /* BARU: sedikit lebih terang saat di-hover */
+    text-decoration: none;                        /* BARU */
 }
 
-.nav-seg a {
-    display: block;
-    padding: 0.3rem 0.8rem;
-    border-radius: 6px;
-    font-size: 0.9rem;
-}
-
-.nav-seg a:hover {
-    background-color: rgba(255, 255, 255, 0.15);
-    text-decoration: none;
-}
-
-.nav-seg a.aktif {
-    background-color: #fff;
-    color: #007e7e;
-}
-
-.nav-sep {
-    width: 1px;
-    height: 1.25rem;
-    background-color: rgba(255, 255, 255, 0.35);
-}
-
-header nav a.nav-btn {
-    background-color: #fff;
-    color: #007e7e;
-    padding: 0.35rem 0.85rem;
-    border-radius: 6px;
-    font-size: 0.85rem;
-    font-weight: 600;
-}
-
-header nav a.nav-btn:hover {
-    background-color: #f1ecfb;
-    text-decoration: none;
-}
+/* DIHAPUS: aturan header, header h1, header nav (ul, a, a:hover, a.aktif), .nav-sep, .nav-btn, dan .nav-toggle-label
+   (menu header lama sudah tidak dipakai). */
 
 /* ===== Main Layout ===== */
 main {
@@ -105,189 +74,250 @@ main {
 }
 
 section {
-    background-color: #fff;
-    border-radius: 8px;
-    padding: 1.5rem;
+    background-color: transparent;                /* DIGANTI: sebelumnya #fff (kartu putih) */
+    padding: 0;                                   /* DIGANTI: sebelumnya 1.5rem */
     margin-bottom: 1.5rem;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+    /* DIHAPUS: border-radius dan box-shadow kartu putih */
 }
 
 section h2 {
     margin-bottom: 1rem;
-    color: #007e7e;
+    color: #fff;                                  /* DIGANTI: sebelumnya #007e7e */
+    font-size: 1.1rem;                            /* BARU */
+    letter-spacing: 0.08em;                       /* BARU */
+    text-transform: uppercase;                    /* BARU */
 }
 
-/* ================================================= */
-/* ===== RINGKASAN - TERSUSUN KE BAWAH / VERTIKAL == */
-/* ================================================= */
-
-main section:nth-of-type(2) {
-    display: grid;
-
-    /* Satu kolom supaya semua kotak ke bawah */
-    grid-template-columns: 1fr;
-
-    gap: 1rem;
-}
-
-main section:nth-of-type(2) h2 {
-    grid-column: 1;
-}
-
-main section:nth-of-type(2) article {
-    background-color: #1f2937;
-    border-radius: 8px;
-    padding: 1rem;
-    text-align: center;
-
-    display: flex;
-    flex-direction: column-reverse;
-}
-
-main section:nth-of-type(2) article h3 {
-    font-size: 0.8rem;
-    font-weight: 400;
-    color: #9ca3af;
-    margin-top: 0.4rem;
-}
-
-main section:nth-of-type(2) article p {
-    font-size: 2.25rem;
-    font-weight: 700;
-    color: #2dd4bf;
-    line-height: 1.1;
-}
-
-/* ===== Tabel ===== */
-table {
-    width: 100%;
-    border-collapse: collapse;
-}
-
-th,
-td {
-    text-align: left;
-    padding: 0.65rem 0.75rem;
-    border-bottom: 1px solid #e2e6ea;
-}
-
-thead {
+/* ===== Beranda: menu utama bergaya game (G5) ===== */
+.mu {
     background-color: transparent;
-    color: #007e7e;
+    box-shadow: none;
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 1rem 0;
 }
 
-th {
-    font-size: 0.85rem;
-    font-weight: 600;
-    border-bottom: 2px solid #007e7e;
+.mu-judul {
+    text-align: center;
+    color: #fff;
+    font-size: 2rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    margin-bottom: 0.25rem;
 }
 
-tbody tr:hover {
-    background-color: #f1ecfb;
+.mu-sub {
+    text-align: center;
+    color: #00e5c7;
+    font-size: 0.8rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
 }
 
-/* ===== Tombol Tabel ===== */
-td button {
-    padding: 0.35rem 0.7rem;
-    margin-right: 0.35rem;
-    border: 1px solid #cdd4da;
-    border-radius: 4px;
-    background-color: #fff;
-    color: #2b2b2b;
-    cursor: pointer;
-    font-size: 0.85rem;
-}
-
-td button:hover {
-    background-color: #f3f4f6;
-}
-
-td button.btn-hapus {
-    color: #b91c1c;
-    border-color: #f0b4b4;
-}
-
-td button.btn-hapus:hover {
-    background-color: #fdecec;
-}
-
-/* ===== Form ===== */
-form p {
-    margin-bottom: 1rem;
-}
-
-form label {
-    display: block;
-    margin-bottom: 0.35rem;
-    font-weight: 600;
-    color: #444;
-}
-
-/* Form dua kolom */
-form#form-tambah {
+.mu-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    column-gap: 1.5rem;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 1.5rem;
 }
 
-form#form-tambah p:last-of-type {
-    grid-column: 1 / -1;
+.mu-menu {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.mu-item {
+    color: #8b93a7;
+    padding: 0.6rem 0.9rem;
+    font-size: 0.9rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    border-radius: 4px;
+}
+
+.mu-item:hover {
+    color: #fff;
+    background-color: rgba(255, 255, 255, 0.08);
+    text-decoration: none;
+}
+
+.mu-item.aktif {
+    background-color: #00e5c7;
+    color: #0e0e16;
+    font-weight: 700;
+}
+
+.mu-stat {
+    border: 1px solid #2a3350;
+    border-radius: 8px;
+    padding: 0.75rem 1rem;
+}
+
+.mu-baris {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #1f2540;
+}
+
+.mu-baris:last-child {
+    border-bottom: none;
+}
+
+.mu-baris span {
+    color: #8b93a7;
+    font-size: 0.85rem;
+}
+
+.mu-baris strong {
+    color: #00e5c7;
+    font-size: 1.5rem;
+}
+
+/* ===== Halaman Daftar: baris seperti menu game (H1) ===== */
+/* DIGANTI: sebelumnya tabel minimalis (table, thead, th, td, tbody tr, td button). */
+.daftar-menu {
+    display: flex;                                /* BARU: baris berjajar ke bawah */
+    flex-direction: column;                       /* BARU */
+    gap: 0.25rem;                                 /* BARU */
+}
+
+.baris {
+    display: flex;                                /* BARU: info di kiri, tombol di kanan */
+    align-items: center;                          /* BARU */
+    justify-content: space-between;               /* BARU */
+    gap: 1rem;                                    /* BARU */
+    padding: 0.6rem 0.9rem;                       /* BARU */
+    border-radius: 4px;                           /* BARU */
+    color: #e5e7eb;                               /* BARU */
+}
+
+.baris:hover {
+    background-color: #00e5c7;                    /* BARU: baris yang disorot berlatar toska terang */
+    color: #0e0e16;                               /* BARU */
+}
+
+.baris-nama {
+    font-weight: 700;                             /* BARU: nama baris tebal */
+    letter-spacing: 0.03em;                       /* BARU */
+}
+
+.baris:hover .baris-nama::before {
+    content: "\25B6 ";                            /* BARU: tanda panah ▶ muncul di baris yang disorot */
+}
+
+.baris-detail {
+    font-size: 0.8rem;                            /* BARU */
+    color: #8b93a7;                               /* BARU: detail berwarna abu */
+}
+
+.baris:hover .baris-detail {
+    color: #0e4f47;                               /* BARU: detail lebih gelap saat baris disorot */
+}
+
+.baris-aksi button {
+    padding: 0.25rem 0.6rem;                      /* BARU */
+    margin-left: 0.25rem;                         /* BARU */
+    border: none;                                 /* BARU */
+    border-radius: 4px;                           /* BARU */
+    background-color: #1f2a4a;                    /* BARU: tombol Edit biru gelap */
+    color: #9cc4ff;                               /* BARU */
+    font-size: 0.75rem;                           /* BARU */
+    font-weight: 700;                             /* BARU */
+    text-transform: uppercase;                    /* BARU */
+    cursor: pointer;                              /* BARU */
+}
+
+.baris-aksi button.btn-hapus {
+    background-color: #3a1f2a;                    /* BARU: tombol Hapus merah gelap */
+    color: #ff8a9c;                               /* BARU */
+}
+
+.kosong {
+    color: #8b93a7;                               /* BARU: pesan saat data kosong */
+    padding: 0.6rem 0.9rem;                       /* BARU */
+}
+
+/* ===== Form: baris label kiri, isian kanan (H1) ===== */
+/* DIGANTI: sebelumnya form dua kolom dengan isian berlatar putih. */
+form#form-tambah p {
+    display: flex;                                /* BARU: label di kiri, isian di kanan */
+    flex-wrap: wrap;                              /* BARU: pesan error turun ke baris di bawahnya */
+    align-items: center;                          /* BARU */
+    justify-content: space-between;               /* BARU */
+    gap: 0 1rem;                                  /* BARU */
+    padding: 0.55rem 0;                           /* BARU */
+    border-bottom: 1px solid #1f2540;             /* BARU: garis pemisah antar baris */
+    margin-bottom: 0;                             /* DIGANTI: sebelumnya 1rem */
+}
+
+form#form-tambah label {
+    flex: 0 0 38%;                                /* BARU: lebar label */
+    margin: 0;                                    /* DIGANTI: sebelumnya margin-bottom 0.35rem */
+    font-size: 0.85rem;                           /* BARU */
+    font-weight: 400;                             /* DIGANTI: sebelumnya 600 */
+    color: #8b93a7;                               /* DIGANTI: sebelumnya #444 */
+}
+
+form#form-tambah label + br {
+    display: none;                                /* TETAP: tanpa jarak ekstra antara label dan isian */
 }
 
 form#form-tambah input,
 form#form-tambah select {
-    max-width: 100%;
-}
-
-form#form-tambah label + br {
-    display: none;
-}
-
-form input,
-form select {
-    width: 100%;
-    max-width: 400px;
-    padding: 0.55rem 0.7rem;
-    border: 1px solid #cdd4da;
+    flex: 1 1 0;                                  /* BARU: isian mengisi sisa lebar */
+    width: auto;                                  /* BARU */
+    max-width: 60%;                               /* DIGANTI: sebelumnya 100% */
+    padding: 0.45rem 0.6rem;                      /* DIGANTI: sebelumnya 0.55rem 0.7rem */
+    background-color: #0b0e18;                    /* BARU: latar isian gelap */
+    border: 1px solid #2a3350;                    /* DIGANTI: sebelumnya #cdd4da */
     border-radius: 4px;
-    font-size: 1rem;
+    color: #e5e7eb;                               /* BARU: teks isian terang */
+    font-size: 0.9rem;                            /* DIGANTI: sebelumnya 1rem */
+}
+
+form#form-tambah input:focus,
+form#form-tambah select:focus {
+    outline: none;                                /* BARU */
+    border-color: #00e5c7;                        /* BARU: bingkai toska saat isian dipilih */
+}
+
+form#form-tambah p:last-of-type {
+    display: block;                               /* DIGANTI: baris tombol Simpan tidak dibagi dua kolom */
+    border-bottom: none;                          /* BARU */
+    padding-top: 1rem;                            /* BARU */
 }
 
 form button[type="submit"] {
-    background-color: #007e7e;
-    color: #fff;
+    width: 100%;                                  /* BARU: tombol Simpan selebar form */
+    background-color: #00e5c7;                    /* DIGANTI: sebelumnya #007e7e */
+    color: #0e0e16;                               /* DIGANTI: sebelumnya #fff */
     border: none;
-    padding: 0.6rem 1.5rem;
+    padding: 0.7rem;                              /* DIGANTI: sebelumnya 0.6rem 1.5rem */
     border-radius: 4px;
-    font-size: 1rem;
+    font-size: 0.85rem;                           /* DIGANTI: sebelumnya 1rem */
+    font-weight: 700;                             /* BARU */
+    letter-spacing: 0.1em;                        /* BARU */
+    text-transform: uppercase;                    /* BARU */
     cursor: pointer;
 }
 
+form button[type="submit"]::before {
+    content: "\25B6 ";                            /* BARU: tanda ▶ di depan tulisan Simpan */
+}
+
 form button[type="submit"]:hover {
-    background-color: #4b1fa3;
+    background-color: #5ff5df;                    /* DIGANTI: sebelumnya #4b1fa3 */
 }
 
 /* ===== Footer ===== */
 footer {
     text-align: center;
     padding: 1.25rem;
-    color: #7a8794;
+    color: #6b7280;                               /* DIGANTI: sebelumnya #7a8794 */
     font-size: 0.9rem;
-}
-
-/* ===== Tabel Responsif ===== */
-.table-responsive {
-    overflow-x: auto;
-}
-
-/* ===== Hamburger Menu ===== */
-.nav-toggle-label {
-    display: none;
-    font-size: 1.6rem;
-    color: #fff;
-    background: none;
-    border: none;
-    cursor: pointer;
 }
 
 /* ===== Flash Message ===== */
@@ -299,19 +329,21 @@ footer {
 }
 
 .flash-success {
-    background-color: #d4edda;
-    color: #155724;
+    background-color: #10382f;                    /* DIGANTI: sebelumnya #d4edda (hijau muda) */
+    color: #7ff0c2;                               /* DIGANTI: sebelumnya #155724 */
 }
 
 .flash-error {
-    background-color: #f8d7da;
-    color: #721c24;
+    background-color: #3a1f2a;                    /* DIGANTI: sebelumnya #f8d7da (merah muda) */
+    color: #ff9aa9;                               /* DIGANTI: sebelumnya #721c24 */
 }
 
 /* ===== Pesan Error Validasi ===== */
 .error {
     display: block;
-    color: #d9534f;
+    flex: 0 0 100%;                               /* BARU: pesan error turun ke baris di bawah isian */
+    text-align: right;                            /* BARU */
+    color: #ff8a9c;                               /* DIGANTI: sebelumnya #d9534f */
     font-size: 0.85rem;
     margin-top: 0.25rem;
 }
@@ -321,75 +353,58 @@ footer {
     margin-bottom: 1rem;
 }
 
+.search-box label {
+    color: #8b93a7;                               /* BARU: label pencarian berwarna abu */
+    font-size: 0.85rem;                           /* BARU */
+    margin-right: 0.5rem;                         /* BARU */
+}
+
 .search-box input {
     width: 100%;
     max-width: 320px;
     padding: 0.5rem 0.75rem;
-    border: 1px solid #cdd4da;
+    background-color: #0b0e18;                    /* BARU: latar isian gelap */
+    border: 1px solid #2a3350;                    /* DIGANTI: sebelumnya #cdd4da */
     border-radius: 4px;
+    color: #e5e7eb;                               /* BARU */
 }
 
-/* ================================================= */
-/* ===== RESPONSIVE BREAKPOINTS ==================== */
-/* ================================================= */
-
-/* Tablet */
-@media (max-width: 768px) {
-
-    /* Ringkasan tetap satu kolom */
-    main section:nth-of-type(2) {
-        grid-template-columns: 1fr;
-    }
+.search-box input:focus {
+    outline: none;                                /* BARU */
+    border-color: #00e5c7;                        /* BARU */
 }
+
+.search-box input::placeholder {
+    color: #6b7280;                               /* BARU: teks petunjuk abu */
+}
+
+/* ===== Responsive Breakpoints ===== */
 
 /* Mobile */
 @media (max-width: 480px) {
-
-    header {
-        position: relative;
-    }
-
-    .nav-toggle-label {
-        display: block;
-    }
-
-    header nav {
-        display: none;
-        width: 100%;
-        order: 3;
-        margin-top: 1rem;
-    }
-
-    header nav.nav-open {
-        display: block;
-    }
-
-    header nav ul {
-        flex-direction: column;
-        gap: 0.75rem;
-        align-items: flex-start;
-    }
-
-    .nav-sep {
-        display: none;
-    }
-
-    .nav-seg ul {
-        align-items: stretch;
-    }
-
-    /* Ringkasan tetap vertikal */
-    main section:nth-of-type(2) {
+    .mu-grid {
         grid-template-columns: 1fr;
     }
 
-    /* Form menjadi satu kolom */
-    form#form-tambah {
-        grid-template-columns: 1fr;
+    /* BARU: di layar kecil baris form disusun ke bawah (label di atas isian) */
+    form#form-tambah p {
+        flex-direction: column;                   /* BARU */
+        align-items: stretch;                     /* BARU */
     }
 
-    form input,
-    form select {
-        max-width: 100%;
+    form#form-tambah label {
+        flex-basis: auto;                         /* BARU */
+        margin-bottom: 0.3rem;                    /* BARU */
+    }
+
+    form#form-tambah input,
+    form#form-tambah select {
+        max-width: 100%;                          /* BARU */
+    }
+
+    /* BARU: di layar kecil tombol Edit dan Hapus turun di bawah info baris */
+    .baris {
+        flex-direction: column;                   /* BARU */
+        align-items: flex-start;                  /* BARU */
     }
 }

@@ -1,6 +1,7 @@
 <?php
-// TETAP: seluruh file ini sama dengan proyek Rental, tidak ada yang diganti.
 $page_title = "Daftar Penyewa";
+$aksi_url = "penyewa/tambah.php"; // BARU: tombol aksi di bar atas, menuju halaman Tambah Penyewa
+$aksi_label = "+ Penyewa";        // BARU: tulisan tombol aksi
 include __DIR__ . '/../includes/header.php';
 require __DIR__ . '/../includes/koneksi.php';
 
@@ -21,41 +22,26 @@ $daftarPenyewa = $pdo->query("SELECT * FROM penyewa ORDER BY id DESC")->fetchAll
                 <input type="text" id="search-input" placeholder="Ketik nama penyewa...">
             </div>
 
-            <div class="table-responsive">
-            <table>
-                <thead>
-                    <tr>
-                        <th>No. Penyewa</th>
-                        <th>Nama</th>
-                        <th>Alamat</th>
-                        <th>No. HP</th>
-                        <th>Aksi</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php if (empty($daftarPenyewa)): ?>
-                    <tr>
-                        <td colspan="5">Belum ada data penyewa. Silakan tambah lewat menu "Tambah Penyewa".</td>
-                    </tr>
-                    <?php else: ?>
-                        <?php foreach ($daftarPenyewa as $penyewa): ?>
-                        <tr>
-                            <td><?php echo e($penyewa['no_penyewa']); ?></td>
-                            <td><?php echo e($penyewa['nama']); ?></td>
-                            <td><?php echo e($penyewa['alamat']); ?></td>
-                            <td><?php echo e($penyewa['no_hp']); ?></td>
-                            <td>
-                                <button type="button">Edit</button>
-                                <button type="button" class="btn-hapus"
-                                    data-id="<?php echo (int) $penyewa['id']; ?>"
-                                    data-nama="<?php echo e($penyewa['nama']); ?>"
-                                    data-action="hapus.php">Hapus</button>
-                            </td>
-                        </tr>
-                        <?php endforeach; ?>
-                    <?php endif; ?>
-                </tbody>
-            </table>
+            <div class="daftar-menu"> <?php /* DIGANTI: sebelumnya <div class="table-responsive"> berisi <table>. Kini daftar berbaris seperti menu game */ ?>
+                <?php if (empty($daftarPenyewa)): ?>
+                    <p class="kosong">Belum ada data penyewa. Silakan tambah lewat tombol "+ Penyewa".</p> <?php /* DIGANTI: sebelumnya baris tabel dengan colspan="5" */ ?>
+                <?php else: ?>
+                    <?php foreach ($daftarPenyewa as $penyewa): ?>
+                    <div class="baris"> <?php /* DIGANTI: sebelumnya <tr> dengan lima <td> */ ?>
+                        <div class="baris-info"> <?php /* BARU: bagian kiri baris berisi nama dan detail */ ?>
+                            <p class="baris-nama"><?php echo e($penyewa['no_penyewa']); ?> &middot; <?php echo e($penyewa['nama']); ?></p> <?php /* DIGANTI: sebelumnya kolom No. Penyewa dan Nama terpisah */ ?>
+                            <p class="baris-detail"><?php echo e($penyewa['alamat'] ?: '-'); ?> &middot; <?php echo e($penyewa['no_hp'] ?: '-'); ?></p> <?php /* DIGANTI: sebelumnya kolom Alamat dan No. HP terpisah. Tanda "-" jika kosong */ ?>
+                        </div>
+                        <div class="baris-aksi"> <?php /* DIGANTI: sebelumnya <td> berisi tombol */ ?>
+                            <button type="button">Edit</button>
+                            <button type="button" class="btn-hapus"
+                                data-id="<?php echo (int) $penyewa['id']; ?>"
+                                data-nama="<?php echo e($penyewa['nama']); ?>"
+                                data-action="hapus.php">Hapus</button>
+                        </div>
+                    </div>
+                    <?php endforeach; ?>
+                <?php endif; ?>
             </div>
         </section>
 <?php include __DIR__ . '/../includes/footer.php'; ?>
